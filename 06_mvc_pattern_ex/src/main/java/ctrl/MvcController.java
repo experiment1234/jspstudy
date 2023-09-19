@@ -1,13 +1,14 @@
-package controller;
+package ctrl;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest ;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.ActionForward;
+import service.MvcService;
 import service.MvcService;
 import service.MvcServicelmpl;
 
@@ -35,36 +36,35 @@ public class MvcController extends HttpServlet {
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html; charset=UTF-8");
     
-    // 요청 확인(URLMapping 확인)
-    String requestURI = request.getRequestURI();                     /*   /mvc/getDate.do  */
-    String contextPath = request.getContextPath();                   /*   /mvc             */
-    String urlMapping = requestURI.substring(contextPath.length());  /*   /getDate.do      */
+    // 요청 확인
+    String requestURI = request.getRequestURI();
+    String contextPath = request.getContextPath();
+    String urlMapping = requestURI.substring(contextPath.length());
     
-    // 서비스 객체 생성(MVC Pattern에서 Model에 해당함)
+    // 서비스 객체 생성
     MvcService mvcService = new MvcServicelmpl();
     
-    // 서비스 실행 결과(어디로 어떻게 이동할 것인가에 관한 정보가 저장)
+    // ActionForward 객체 생성 (서비스의 실행 결과를 저장할 객체)
     ActionForward af = null;
     
-    // 요청에 따른 서비스 실행
+    // 요청에 따른 서비스 선택과 실행
     switch(urlMapping) {
-    case "/getDate.do":
-      af = mvcService.getDate(request);
+    case "/getAge.do":
+      af = mvcService.getAge(request);
       break;
-    case "/getTime.do":
-      af = mvcService.getTime(request);
+    case "/getAbs.do":
+      mvcService.getAbs(request, response);
       break;
-    case "/getDatetime.do":
-      mvcService.getDatetime(request, response);
-      break;
+    case "/getInfo.do":
+    	
     }
     
-    // 서비스 실행 결과에 의한 이동
+    // 이동
     if(af != null) {
       if(af.isRedirect()) {
         response.sendRedirect(af.getPath());
       } else {
-        request.getRequestDispatcher(af.getPath()).forward(request, response);        
+        request.getRequestDispatcher(af.getPath()).forward(request, response);
       }
     }
     
