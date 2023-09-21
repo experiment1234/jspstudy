@@ -13,7 +13,7 @@
   $(function(){
     // 함수 호출
     fnArticleList();
-    fnArticleAdd();
+    fnArticleModify();
   })
 
   // 함수 정의
@@ -23,17 +23,11 @@
     })
   }
   // 함수 정의
-  function fnArticleAdd(){
-    $('#frm_add').submit(function(event){
+  function fnArticleModify(){
+    $('#frm_edit').submit(function(event){
       if($('#title').val() === ''){
         alert('제목은 필수입니다.');
         $('#title').focus();
-        event.preventDefault();
-        return;
-      }
-      if($('#editor').val() === ''){
-        alert('작성자는 필수입니다.');
-        $('#editor').focus();
         event.preventDefault();
         return;
       }
@@ -45,20 +39,17 @@
 <body>
 
 <div>
-  <form id="frm_add" method="post" action="${contextPath}/addArticle.do">
+  <form id="frm_edit" method="post" action="${contextPath}/modifyArticle.do">
     <div>
       <label for="title">제목</label>
-      <input type="text" id="title" name="title">
+      <input type="text" id="title" name="title" value="${article.title}">
     </div>
     <div>
-      <label for="editor">작성자</label>
-      <input type="text" id="editor" name="editor">
+      <textarea rows="5" cols="50" name="content">${article.content}</textarea>
     </div>
     <div>
-      <textarea rows="5" cols="50" name="content"></textarea>
-    </div>
-    <div>
-      <button type="submit">작성완료</button>
+      <input type="hidden" name="article_no" value="${article.article_no}">
+      <button type="submit">수정완료</button>
       <button type="reset">작성초기화</button>
       <button type="button" id="btn_list">목록으로이동</button>
     </div>

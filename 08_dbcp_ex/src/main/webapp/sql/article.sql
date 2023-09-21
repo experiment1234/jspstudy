@@ -1,12 +1,12 @@
 DROP TABLE ARTICLE_T;
 CREATE TABLE ARTICLE_T (
-    ARTICLE_NO NUMBER NOT NULL,
-    TITLE      VARCHAR2(1000 BYTE) NOT NULL,
-    CONTENT    CLOB,
-    EDITOR     VARCHAR2(1000 BYTE) NOT NULL,
-    HIT        NUMBER,
-    LASTMODIFIED DATE,
-    CREATED     DATE,
+    /* 기사번호   */ ARTICLE_NO   NUMBER              NOT NULL,
+    /* 제목       */ TITLE        VARCHAR2(1000 BYTE) NOT NULL,
+    /* 내용       */ CONTENT      CLOB,
+    /* 작성자     */ EDITOR       VARCHAR2(1000 BYTE) NOT NULL,
+    /* 조회수     */ HIT          NUMBER,
+    /* 최종수정일 */ LASTMODIFIED DATE,
+    /* 최초작성일 */ CREATED      DATE,
     CONSTRAINT PK_ARTICLE PRIMARY KEY(ARTICLE_NO)
 );
 
@@ -28,4 +28,15 @@ CREATE SEQUENCE ARTICLE_SEQ NOCACHE;
    update article_t set hit = hit + 1 where article_no = 3;
 2. 목록 보기에서 기사를 선택한 뒤 삭제한다.
    delete from article_t where article_no in(1, 2, 3);
+*/
+
+
+
+/*
+* 목록
+*               /getArticleDetail.do 
+*               redirect : /getArticle.do
+* 편집  
+*               /modifyArticle.do
+*               redirect : /getArticle.do
 */

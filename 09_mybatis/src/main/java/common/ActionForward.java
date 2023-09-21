@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ActionForward {
-  private String path;
-  private boolean isRedirect;
+		private String path;
+		private boolean isRedirect;
+	
 }
