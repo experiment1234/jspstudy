@@ -8,17 +8,14 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import common.ActionForward;
-import domain.BoardDto;
+
 import domain.BookDto;
-import repository.BoardDao;
+
 import repository.BookDao;
 import util.PageVo;
 
 public class BookServicelmpl implements BookService {
 
-	  private BookDao dao = BookDao.getDao();
-	  private PageVo pageVo = new PageVo();
-	  
 	  @Override
 	  public ActionForward bookList(HttpServletRequest request) {
 	    Optional<String> opt = Optional.ofNullable(request.getParameter("page"));
